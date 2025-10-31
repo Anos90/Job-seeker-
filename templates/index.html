@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Seeker Home</title>
+  <style>
+    .card {
+      width: 400px;
+      background: #fff;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .card h3 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #007bff;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #333;
+      font-size: 14px;
+      text-align: center;
+      /* centers label text */
+      width: 100%;
+      /* matches dropdown width */
+    }
+
+
+    select {
+      width: 60%;
+      height: 42px;
+      margin-bottom: 18px;
+      padding: 8px 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    select:focus {
+      border-color: #007bff;
+      box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+    }
+
+    input[type="submit"] {
+      width: 60%;
+      height: 45px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      background: #007bff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    input[type="submit"]:hover {
+      background: #0056b3;
+      transform: scale(1.02);
+    }
+  </style>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background: #0073e6;
+      color: white;
+      padding: 15px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+      background: linear-gradient(to right, #0073e6, #00b4d8);
+      color: white;
+    }
+
+    .hero h2 {
+      font-size: 36px;
+      margin-bottom: 15px;
+    }
+
+    .search-bar {
+      margin-top: 20px;
+    }
+
+    .search-bar input {
+      padding: 10px;
+      width: 300px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .search-bar button {
+      padding: 10px 20px;
+      margin-left: 10px;
+      border: none;
+      background: #ffcc00;
+      color: black;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .jobs {
+      padding: 50px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .job-card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+    }
+
+    .job-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta {
+      text-align: center;
+      padding: 40px;
+      background: #0073e6;
+      color: white;
+    }
+
+    .cta button {
+      padding: 12px 25px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      background: #ffcc00;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #333;
+      color: white;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <header>
+    <h1 style="text-align:center; width:100%;">Job Seeker</h1>
+    <nav>
+      <!-- <a href="#">Home</a> -->
+      <!-- <a href="#">Jobs</a> -->
+      <!-- <a href="#">Profile</a> -->
+      <!-- <a href="#">Logout</a> -->
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Find Your Dream Job</h2>
+    <p>Search and apply for jobs</p>
+
+    <div class="container">
+      <form method="POST" action="/result_table" id="searchForm">
+
+        <!-- Location Dropdown -->
+        <label for="location">Location:</label>
+        <select name="location" id="location">
+          <option value="">-- Select Location --</option>
+          {% for i in locations %}
+          <option value="{{ i }}">{{ i }}</option>
+          {% endfor %}
+        </select>
+
+        <!-- Rating Dropdown -->
+        <label for="rating">Rating:</label>
+        <select name="rating" id="rating">
+          <option value="">-- Select Rating --</option>
+          <option value="1-2">1 - 2</option>
+          <option value="2-3">2 - 3</option>
+          <option value="3-4">3 - 4</option>
+          <option value="4-5">4 - 5</option>
+        </select>
+
+        <!-- Industry Dropdown -->
+        <label for="industry">Industry:</label>
+        <select name="industry" id="industry">
+          <option value="">-- Select Industry --</option>
+          {% for i in industries %}
+          <option value="{{ i }}">{{ i }}</option>
+          {% endfor %}
+        </select>
+
+        <!-- Type Dropdown -->
+        <label for="type">Type:</label>
+        <select name="type" id="type">
+          <option value="">-- Select Type --</option>
+          {% for t in types %}
+          <option value="{{ t }}">{{ t }}</option>
+          {% endfor %}
+        </select>
+
+        {% if text %}
+        <h4 style="color: white;">{{ text }}</h4>
+        {% endif %}
+
+        <!-- Radio Buttons -->
+        <label>
+          <input type="radio" name="redirect" value="/result_table" checked> Result Table
+        </label>
+        <label>
+          <input type="radio" name="redirect" value="/result_visualize"> Visualize table
+        </label>
+        <br><br>
+
+        <!-- Submit Button -->
+        <input type="submit" value="Search">
+
+      </form>
+      
+    </div>
+<script>
+  document.getElementById("searchForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // prevent default form action
+
+    // get selected radio value
+    let selectedPage = document.querySelector('input[name="redirect"]:checked').value;
+
+    // update form action dynamically
+    this.action = selectedPage;
+    this.submit();
+  });
+</script>
+
+    <footer>
+      <p>&copy; 2025 Job Seeker Portal | All Rights Reserved</p>
+    </footer>
+
+</body>
+
+</html>

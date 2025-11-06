@@ -2,8 +2,6 @@ import methods
 from flask import Flask
 from flask import render_template
 from flask import request
-import matplotlib.pyplot as plt
-import pandas as pd
 app =Flask(__name__)
 
 
